@@ -1,21 +1,25 @@
 import "./App.css";
-
-const Person = (props) => {
-  return (
-    <>
-      <h1>Name: {props.name}</h1>
-      <h2>Last Name: {props.lastName}</h2>
-      <h2>Age: {props.age}</h2>
-    </>
-  );
-};
+import { useState, useEffect } from "react";
 
 const App = () => {
+  const [counter, setCounter] = useState(0);
+
+  // componentの初期化時とcounterのstate変更時に走る
+  useEffect(() => {
+    alert("カウンターを" + counter + "に変えました。");
+    // stateのマニュアルでの変更は不可。ここではsetCounterで変更する必要あり。
+    // counter = 100;
+  }, [counter]);
+
   return (
     <div className="App">
-      <Person name={"John"} lastName={"A"} age={"10"} />
-      <Person name={"Hurry"} lastName={"B"} age={"20"} />
-      <Person name={"Micky"} lastName={"C"} age={"30"} />
+      <button onClick={() => setCounter((prevCount) => prevCount - 1)}>
+        -
+      </button>
+      <h1>{counter}</h1>
+      <button onClick={() => setCounter((prevCount) => prevCount + 1)}>
+        +
+      </button>
     </div>
   );
 };
